@@ -4,7 +4,7 @@ SQL unsigned integer datatype
 Class {
 	#name : #SQLUInteger,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }

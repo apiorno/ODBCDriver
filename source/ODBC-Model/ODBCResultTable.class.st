@@ -11,7 +11,7 @@ Class {
 		'extraLinkTitle',
 		'columnPrintBlock'
 	],
-	#category : #'ODBC- Model-Definitions'
+	#category : #'ODBC-Model-Definitions'
 }
 
 { #category : #formatting }

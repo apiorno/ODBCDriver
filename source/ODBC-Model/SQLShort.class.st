@@ -1,31 +1,28 @@
 "
-SQL small integer datatype
+SQL short datatype
 "
 Class {
-	#name : #SQLSmallInteger,
+	#name : #SQLShort,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLSmallInteger class >> fields [
+SQLShort class >> fields [
+	" 
+	SQLShort defineFields
 	"
-	SQLSmallInteger defineFields
-	"
-	^#(
-		(value 'short')
-	)
-
+	^ #(#(#value 'short') )
 ]
 
 { #category : #accessing }
-SQLSmallInteger >> value [
+SQLShort >> value [
 	"This method was automatically generated"
 	^handle signedShortAt: 1
 ]
 
 { #category : #accessing }
-SQLSmallInteger >> value: anObject [
+SQLShort >> value: anObject [
 	"This method was automatically generated"
 	handle signedShortAt: 1 put: anObject
 ]

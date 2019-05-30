@@ -14,7 +14,7 @@ Class {
 	#pools : [
 		'ODBCConstants'
 	],
-	#category : #'ODBC- Model-Core'
+	#category : #'ODBC-Model-Core'
 }
 
 { #category : #'instance creation' }

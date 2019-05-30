@@ -12,7 +12,7 @@ Class {
 		'digits',
 		'size'
 	],
-	#category : #'ODBC- Model-Definitions'
+	#category : #'ODBC-Model-Definitions'
 }
 
 { #category : #accessing }

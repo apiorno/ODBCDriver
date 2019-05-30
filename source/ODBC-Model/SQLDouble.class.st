@@ -4,7 +4,7 @@ SQL double datatype
 Class {
 	#name : #SQLDouble,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }

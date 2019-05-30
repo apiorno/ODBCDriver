@@ -34,7 +34,7 @@ Class {
 		'SQLUINTEGER',
 		'SQLVARCHAR'
 	],
-	#category : #'ODBC- Model-Support'
+	#category : #'ODBC-Model-Support'
 }
 
 { #category : #'class initialization' }

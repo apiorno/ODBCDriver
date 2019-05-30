@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'ODBC- Model-Core'
+	#category : #'ODBC-Model-Core'
 }
 
 { #category : #'instance creation' }

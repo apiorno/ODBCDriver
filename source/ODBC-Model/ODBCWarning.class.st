@@ -10,7 +10,7 @@ Class {
 	#pools : [
 		'ODBCConstants'
 	],
-	#category : #'ODBC- Model-Errors'
+	#category : #'ODBC-Model-Errors'
 }
 
 { #category : #'instance creation' }

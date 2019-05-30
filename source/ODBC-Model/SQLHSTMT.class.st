@@ -1,28 +1,28 @@
 "
-SQL integer datatype
+A handle to a statement
 "
 Class {
-	#name : #SQLInteger,
+	#name : #SQLHSTMT,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLInteger class >> fields [
+SQLHSTMT class >> fields [
 	" 
-	SQLInteger defineFields 
+	SQLHSTMT defineFields
 	"
 	^ #(#(#value 'long') )
 ]
 
 { #category : #accessing }
-SQLInteger >> value [
+SQLHSTMT >> value [
 	"This method was automatically generated"
 	^handle signedLongAt: 1
 ]
 
 { #category : #accessing }
-SQLInteger >> value: anObject [
+SQLHSTMT >> value: anObject [
 	"This method was automatically generated"
 	handle signedLongAt: 1 put: anObject
 ]

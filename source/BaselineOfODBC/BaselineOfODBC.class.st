@@ -15,16 +15,18 @@ BaselineOfODBC >> baseline: spec [
 				setUpDependencies: spec;
 				baselineODBC: spec.
 			spec
+				group: 'Deployment' with: 'Model';
 				group: 'CI' with: 'Tests';
-				group: 'Development' with: #('Tests') ]
+				group: 'Development' with: 'Tests' ]
 ]
 
 { #category : #baseline }
 BaselineOfODBC >> baselineODBC: spec [
 
 	spec
-		package: 'ODBC';
-		group: 'Deployment' with: #('ODBC')
+		package: 'ODBC-Model';
+		group: 'Model' with: 'ODBC-Model';
+		group: 'Tests' with: 'Model'
 ]
 
 { #category : #baseline }

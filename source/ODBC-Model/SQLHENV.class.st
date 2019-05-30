@@ -1,28 +1,28 @@
 "
-A handle to a statement
+A handle to an ODBC environment 
 "
 Class {
-	#name : #SQLHSTMT,
+	#name : #SQLHENV,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLHSTMT class >> fields [
+SQLHENV class >> fields [
 	" 
-	SQLHSTMT defineFields
+	SQLHENV defineFields 
 	"
 	^ #(#(#value 'long') )
 ]
 
 { #category : #accessing }
-SQLHSTMT >> value [
+SQLHENV >> value [
 	"This method was automatically generated"
 	^handle signedLongAt: 1
 ]
 
 { #category : #accessing }
-SQLHSTMT >> value: anObject [
+SQLHENV >> value: anObject [
 	"This method was automatically generated"
 	handle signedLongAt: 1 put: anObject
 ]

@@ -7,10 +7,13 @@ ODBC Driver for Pharo migrated from [PharoExtras][] and Update to work fine on P
   -Open a Playground and evaluate:
 
 ```smalltalk
-Metacello new
-  baseline: 'ODBC';
-  repository: 'github://apiorno/ODBC:master/source';
-  load
+	Metacello new
+		baseline: 'ODBC';
+		githubUser: 'apiorno'
+			project: 'ODBCDriver'
+			commitish: 'master'
+			path: 'source';
+		load
 ```
 
 [pharoextras]: http://smalltalkhub.com/#!/~PharoExtras/ODBC/

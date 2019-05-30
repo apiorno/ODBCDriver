@@ -4,7 +4,7 @@ SQL float datatype
 Class {
 	#name : #SQLFloat,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }

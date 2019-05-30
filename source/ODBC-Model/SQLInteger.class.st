@@ -1,28 +1,28 @@
 "
-A handle to a database connection
+SQL integer datatype
 "
 Class {
-	#name : #SQLHDBC,
+	#name : #SQLInteger,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLHDBC class >> fields [
+SQLInteger class >> fields [
 	" 
-	SQLHDBC defineFields 
+	SQLInteger defineFields 
 	"
 	^ #(#(#value 'long') )
 ]
 
 { #category : #accessing }
-SQLHDBC >> value [
+SQLInteger >> value [
 	"This method was automatically generated"
 	^handle signedLongAt: 1
 ]
 
 { #category : #accessing }
-SQLHDBC >> value: anObject [
+SQLInteger >> value: anObject [
 	"This method was automatically generated"
 	handle signedLongAt: 1 put: anObject
 ]

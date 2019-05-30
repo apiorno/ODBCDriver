@@ -10,7 +10,7 @@ Class {
 		'digits',
 		'nullable'
 	],
-	#category : #'ODBC- Model-Definitions'
+	#category : #'ODBC-Model-Definitions'
 }
 
 { #category : #accessing }

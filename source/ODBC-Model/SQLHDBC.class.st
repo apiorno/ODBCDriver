@@ -1,28 +1,28 @@
 "
-A handle to an ODBC environment 
+A handle to a database connection
 "
 Class {
-	#name : #SQLHENV,
+	#name : #SQLHDBC,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLHENV class >> fields [
+SQLHDBC class >> fields [
 	" 
-	SQLHENV defineFields 
+	SQLHDBC defineFields 
 	"
 	^ #(#(#value 'long') )
 ]
 
 { #category : #accessing }
-SQLHENV >> value [
+SQLHDBC >> value [
 	"This method was automatically generated"
 	^handle signedLongAt: 1
 ]
 
 { #category : #accessing }
-SQLHENV >> value: anObject [
+SQLHDBC >> value: anObject [
 	"This method was automatically generated"
 	handle signedLongAt: 1 put: anObject
 ]

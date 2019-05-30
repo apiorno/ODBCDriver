@@ -4,7 +4,7 @@ SQL byte datatype
 Class {
 	#name : #SQLByte,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }

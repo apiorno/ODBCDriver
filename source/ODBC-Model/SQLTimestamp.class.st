@@ -4,7 +4,7 @@ SQL timestamp datatype
 Class {
 	#name : #SQLTimestamp,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }

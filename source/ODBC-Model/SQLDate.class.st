@@ -1,52 +1,52 @@
 "
-SQL time datatype
+SQL date datatype
 "
 Class {
-	#name : #SQLTime,
+	#name : #SQLDate,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC- Model-Structure'
+	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLTime class >> fields [
+SQLDate class >> fields [
 	" 
-	SQLTime defineFields
+	SQLDate defineFields
 	"
-	^ #(#(#hour 'ushort') #(#minute 'ushort') #(#second 'ushort') )
+	^ #(#(#year 'short') #(#month 'ushort') #(#day 'ushort') )
 ]
 
 { #category : #accessing }
-SQLTime >> hour [
-	"This method was automatically generated"
-	^handle unsignedShortAt: 1
-]
-
-{ #category : #accessing }
-SQLTime >> hour: anObject [
-	"This method was automatically generated"
-	handle unsignedShortAt: 1 put: anObject
-]
-
-{ #category : #accessing }
-SQLTime >> minute [
-	"This method was automatically generated"
-	^handle unsignedShortAt: 3
-]
-
-{ #category : #accessing }
-SQLTime >> minute: anObject [
-	"This method was automatically generated"
-	handle unsignedShortAt: 3 put: anObject
-]
-
-{ #category : #accessing }
-SQLTime >> second [
+SQLDate >> day [
 	"This method was automatically generated"
 	^handle unsignedShortAt: 5
 ]
 
 { #category : #accessing }
-SQLTime >> second: anObject [
+SQLDate >> day: anObject [
 	"This method was automatically generated"
 	handle unsignedShortAt: 5 put: anObject
+]
+
+{ #category : #accessing }
+SQLDate >> month [
+	"This method was automatically generated"
+	^handle unsignedShortAt: 3
+]
+
+{ #category : #accessing }
+SQLDate >> month: anObject [
+	"This method was automatically generated"
+	handle unsignedShortAt: 3 put: anObject
+]
+
+{ #category : #accessing }
+SQLDate >> year [
+	"This method was automatically generated"
+	^handle signedShortAt: 1
+]
+
+{ #category : #accessing }
+SQLDate >> year: anObject [
+	"This method was automatically generated"
+	handle signedShortAt: 1 put: anObject
 ]
