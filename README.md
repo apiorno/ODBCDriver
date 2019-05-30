@@ -11,7 +11,7 @@ ODBC Driver for Pharo migrated from [PharoExtras][] and Update to work fine on P
 		baseline: 'ODBC';
 		githubUser: 'apiorno'
 			project: 'ODBCDriver'
-			commitish: 'master'
+			commitish: 'release-candidate'
 			path: 'source';
 		load
 ```
