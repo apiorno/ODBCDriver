@@ -1,4 +1,4 @@
-# ODBCSqlDriver
+# ODBCDriver
 
 ODBC Driver for Pharo migrated from [PharoExtras][] and Update to work fine on Phar 7.
 
