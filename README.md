@@ -11,7 +11,9 @@
     <a href="https://github.com/apiorno/ODBCDriver/issues/new?labels=Type%3A+Feature">Request feature</a>
   </p>
 </p>
+
 [![Build Status](https://travis-ci.org/apiorno/ODBCDriver.svg?branch=release-candidate)](https://travis-ci.org/apiorno/ODBCDriver)
+
 ## License
 - The code is licensed under [MIT](LICENSE).
 - The documentation is licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
