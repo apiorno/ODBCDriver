@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logos/184x184.png">
+<p align="center"><img src="assets/logos/184x184.gif">
  <h1 align="center">ODBCDriver</h1>
   <p align="center">
     ODBC Driver for Pharo migrated from [PharoExtras][] and Update to work fine on Phar 7.
