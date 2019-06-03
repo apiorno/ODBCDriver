@@ -1,3 +1,12 @@
+"
+I represent the structure of the ODBC Driver project.
+
+I load the packages of the project and its dependencies.
+
+Public API and Key Messages
+
+- baseline: aSpec
+"
 Class {
 	#name : #BaselineOfODBC,
 	#superclass : #BaselineOf,
