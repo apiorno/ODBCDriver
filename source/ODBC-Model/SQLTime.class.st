@@ -3,7 +3,7 @@ SQL time datatype
 "
 Class {
 	#name : #SQLTime,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

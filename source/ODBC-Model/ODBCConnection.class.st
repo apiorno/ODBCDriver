@@ -342,10 +342,9 @@ ODBCConnection >> connect [
 	"Connect to the database"
 	self registerForFinalization.
 	hEnv := self sqlAllocEnv.
-	false ifTrue: 
-		[ self 
+	self 
 			sqlSetEnvAttr: 200
-			value: 2	"SQL_ATTR_ODBC_VERSION" ].
+			value: 2	"SQL_ATTR_ODBC_VERSION" .
 	hdbc := self sqlAllocConnect: hEnv.
 	(dsn asLowercase includesSubstring: 'driver={') 
 		ifTrue: 

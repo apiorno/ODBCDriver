@@ -3,7 +3,7 @@ SQL small integer datatype
 "
 Class {
 	#name : #SQLSmallInteger,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

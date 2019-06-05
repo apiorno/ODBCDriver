@@ -3,7 +3,7 @@ SQL integer datatype
 "
 Class {
 	#name : #SQLInteger,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

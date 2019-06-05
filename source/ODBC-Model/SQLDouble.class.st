@@ -3,7 +3,7 @@ SQL double datatype
 "
 Class {
 	#name : #SQLDouble,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

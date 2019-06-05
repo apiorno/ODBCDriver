@@ -3,7 +3,7 @@ SQL timestamp datatype
 "
 Class {
 	#name : #SQLTimestamp,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

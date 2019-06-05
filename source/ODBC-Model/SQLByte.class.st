@@ -3,7 +3,7 @@ SQL byte datatype
 "
 Class {
 	#name : #SQLByte,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

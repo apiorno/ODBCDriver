@@ -3,7 +3,7 @@ SQL date datatype
 "
 Class {
 	#name : #SQLDate,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

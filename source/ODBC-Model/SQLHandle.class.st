@@ -1,28 +1,28 @@
 "
-SQL float datatype
+SQL handle datatype
 "
 Class {
-	#name : #SQLFloat,
+	#name : #SQLHandle,
 	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 
 { #category : #accessing }
-SQLFloat class >> fields [
+SQLHandle class >> fields [
 	" 
-	SQLFloat defineFields
+	SQLHANDLE defineFields
 	"
-	^ #(#(#value 'float') )
+	^ #(#(#value 'long') )
 ]
 
 { #category : #accessing }
-SQLFloat >> value [
+SQLHandle >> value [
 	"This method was automatically generated"
-	^handle floatAt: 1
+	^handle signedLongAt: 1
 ]
 
 { #category : #accessing }
-SQLFloat >> value: anObject [
+SQLHandle >> value: anObject [
 	"This method was automatically generated"
-	handle floatAt: 1 put: anObject
+	handle signedLongAt: 1 put: anObject
 ]

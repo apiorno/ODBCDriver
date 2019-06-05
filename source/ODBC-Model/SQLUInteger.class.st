@@ -3,7 +3,7 @@ SQL unsigned integer datatype
 "
 Class {
 	#name : #SQLUInteger,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

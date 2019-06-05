@@ -12,7 +12,7 @@ Class {
 
 { #category : #'instance creation' }
 ODBCLibrary class >> default [
-	^ default ifNil:[default := super new]
+	^ default ifNil:[default := self uniqueInstance ]
 ]
 
 { #category : #accessing }
@@ -42,15 +42,42 @@ ODBCLibrary >> sqlAllocConnectEnvironment: environmentHandle connection: connect
 	SQLAllocConnect(
 	SQLHENV EnvironmentHandle, 
 	SQLHDBC *ConnectionHandle);"
+	
+	"#define SQL_HANDLE_ENV              1
+ #define SQL_HANDLE_DBC              2
+ #define SQL_HANDLE_STMT             3
+ #define SQL_HANDLE_DESC 				4
+ #define SQL_NULL_HANDLE  				0"
 
-	self ffiCall: #(short SQLAllocConnect (SQLHENV SQLHDBC *))
+	"self
+		ffiCall: #(short SQLAllocHandle #(2 , SQLHENV environmentHandle , SQLHDBC connectionHandle))"
+
+	self ffiCall: #(short SQLAllocConnect (SQLHENV environmentHandle , SQLHDBC connectionHandle))
 ]
 
 { #category : #'primitives - environments' }
 ODBCLibrary >> sqlAllocEnv: environmentHandle [
 	"SQLRETURN SQLAllocEnv(SQLHENV *EnvironmentHandle);"
 
-	self ffiCall: #(short SQLAllocEnv (SQLHENV *))
+"#define SQL_HANDLE_ENV              1
+ #define SQL_HANDLE_DBC              2
+ #define SQL_HANDLE_STMT             3
+ #define SQL_HANDLE_DESC 				4
+ #define SQL_NULL_HANDLE  				0"
+
+	"self
+		ffiCall: #(short SQLAllocHandle #(1 , 0 , SQLHENV environmentHandle))"
+	self ffiCall: #(short SQLAllocEnv (SQLHENV environmentHandle))
+]
+
+{ #category : #'primitives - connections' }
+ODBCLibrary >> sqlAllocHandleType: aHandleType inputHandle: anInputHandle outputHandle: anOutputHandle [
+	"SQLRETURN SQLAllocHandle(  
+      SQLSMALLINT   HandleType,  
+      SQLHANDLE     InputHandle,  
+      SQLHANDLE *   OutputHandlePtr); "
+
+	self ffiCall: #(short SQLAllocHandle (SQLSmallInteger aHandleType, SQLHANDLE anInputHandle, SQLHANDLE *anOutputHandle ))
 ]
 
 { #category : #'primitives - statements' }
@@ -60,7 +87,7 @@ ODBCLibrary >> sqlAllocStmtConnection: environmentHandle statement: statementHan
 	SQLHDBC ConnectionHandle,
 	SQLHSTMT *StatementHandle); "
 
-	self ffiCall: #(short SQLAllocStmt (SQLHDBC SQLHSTMT*))
+	self ffiCall: #(short SQLAllocStmt (SQLHDBC environmentHandle , SQLHSTMT *statementHandle))
 ]
 
 { #category : #'primitives - statements' }
@@ -74,7 +101,7 @@ ODBCLibrary >> sqlBindCol: statementHandle columnNumber: columnNumber targetType
 	SQLINTEGER BufferLength,  
 	SQLINTEGER *StrLen:=or:=Ind);"
 
-	self ffiCall: #(short SQLBindCol (SQLHSTMT ushort short void* long SQLInteger*))
+	self ffiCall: #(short SQLBindCol (SQLHSTMT statementHandle, ushort columnNumber, short targetType, void* targetValue, long bufferLength, SQLInteger* strLenght))
 ]
 
 { #category : #'primitives - statements' }
@@ -89,7 +116,7 @@ ODBCLibrary >> sqlBindParam: statementHandle at: paramIdx appType: dtype sqlType
 		SQLPOINTER ParameterValue,
 		SQLLEN *StrLen_or_Ind);"
 
-	self ffiCall: #(short SQLBindParam (SQLHSTMT ushort short short ulong short void* SQLInteger*))
+	self ffiCall: #(short SQLBindParam (SQLHSTMT statementHandle, ushort paramIdx, short dtype, short ptype, ulong sz, short digits, void* vptr, SQLInteger *lenPtr))
 ]
 
 { #category : #'primitives - statements' }
@@ -106,7 +133,7 @@ ODBCLibrary >> sqlBindParameter: statementHandle at: paramIdx ioType: ioType val
 		SQLLEN			cbValueMax,
 		SQLLEN			*pcbValue);"
 
-	self ffiCall: #(short SQLBindParam (SQLHSTMT ushort short short short ulong short void* long SQLInteger*))
+	self ffiCall: #(short SQLBindParam (SQLHSTMT statementHandle, ushort paramIdx, short ioType, short dtype, short ptype, ulong sz, short digits, void* vptr,  long bfsz, SQLInteger *lenPtr))
 ]
 
 { #category : #'primitives - connections' }
@@ -120,7 +147,7 @@ ODBCLibrary >> sqlConnect: connectionHandle dsn: dsnString dsnLength: dsnLengthI
 	SQLCHAR *Authentication, 
 	SQLSMALLINT NameLength3);"
 
-	self ffiCall: #(short SQLConnect (SQLHDBC char* short char* short char* short))
+	self ffiCall: #(short SQLConnect (SQLHDBC connectionHandle, char *dsnString, short dsnLengthInteger, char *userString, short userLengthInteger, char *authenticationString, short authenticationLengthInteger))
 ]
 
 { #category : #'primitives - resultset' }
@@ -137,7 +164,7 @@ ODBCLibrary >> sqlDescribeCol: statementHandle columnNumber: columnCount columnN
 	SQLSMALLINT *DecimalDigits,
 	SQLSMALLINT *Nullable);"
 
-	self ffiCall: #(short SQLDescribeCol (SQLHSTMT ushort void* short SQLSmallInteger* SQLSmallInteger* SQLUInteger* SQLSmallInteger* SQLSmallInteger*))
+	self ffiCall: #(short SQLDescribeCol (SQLHSTMT statementHandle, ushort columnCount, char *columnName, short bufferLength, SQLSmallInteger *nameLength, SQLSmallInteger *dataType, SQLUInteger *columnSize, SQLSmallInteger *decimalDigits, SQLSmallInteger *nullable))
 ]
 
 { #category : #'primitives - statements' }
@@ -150,14 +177,14 @@ ODBCLibrary >> sqlDescribeParam: statementHandle at: paramIdx dataType: typePtr 
 		SQLSMALLINT	*pibScale,
 		SQLSMALLINT	*pfNullable);"
 
-	self ffiCall: #(short SQLDescribeParam (SQLHSTMT ushort SQLSmallInteger* SQLInteger* SQLSmallInteger* SQLSmallInteger*))
+	self ffiCall: #(short SQLDescribeParam (SQLHSTMT statementHandle, ushort paramIdx, SQLSmallInteger *typePtr, SQLInteger *lengthPtr SQLSmallInteger *scalePtr SQLSmallInteger *nullable))
 ]
 
 { #category : #'primitives - connections' }
 ODBCLibrary >> sqlDisconnect: connectionHandle [ 
 	"SQLRETURN SQLDisconnect(SQLHDBC ConnectionHandle);"
 
-	self ffiCall: #(short 'SQLDisconnect' (SQLHDBC))
+	self ffiCall: #(short 'SQLDisconnect' (SQLHDBC connectionHandle))
 ]
 
 { #category : #'primitives - connections' }
@@ -172,7 +199,7 @@ ODBCLibrary >> sqlDriverConnect: connectionHandle with: hWnd with: inConnStr wit
 		SQLSMALLINT *     StringLength2Ptr,
 		SQLUSMALLINT     DriverCompletion);"
 
-	self ffiCall: #(short SQLDriverConnect (SQLHDBC Win32Handle char* short char* short SQLSmallInteger* ulong))
+	self ffiCall: #(short SQLDriverConnect (SQLHDBC connectionHandle, Win32Handle hWnd, char *inConnStr, short inStrLength, char *outStrLength, short outStrLength, SQLSmallInteger *outSizePtr, ulong flags))
 ]
 
 { #category : #'primitives - connections' }
@@ -183,7 +210,7 @@ ODBCLibrary >> sqlEndTran: type handle: aHandle completionType: completionType [
 	SQLHANDLE Handle,
      SQLSMALLINT CompletionType);"
 
-	self ffiCall: #(short SQLEndTran (short SQLHDBC short))
+	self ffiCall: #(short SQLEndTran (short type, SQLHDBC aHandle, short completionType))
 ]
 
 { #category : #'primitives - errors' }
@@ -199,7 +226,7 @@ ODBCLibrary >> sqlErrorEnvironment: environmentHandle connection: connectionHand
 	SQLSMALLINT BufferLength, 
 	SQLSMALLINT *TextLength);"
 
-	self ffiCall: #(short SQLError (SQLHENV SQLHDBC SQLHSTMT void* SQLInteger* void* short SQLSmallInteger*))
+	self ffiCall: #(short SQLError (SQLHENV environmentHandle, SQLHDBC connectionHandle, SQLHSTMT statementHandle,void* stateString, SQLInteger nativeError, void* messateTextString, short bufferLengthInteger, SQLSmallInteger textLenghtInteger))
 ]
 
 { #category : #'primitives - statements' }
@@ -210,7 +237,7 @@ ODBCLibrary >> sqlExecDirect: statementHandle statement: statementString length:
  	SQLCHAR *StatementText,
 	SQLINTEGER TextLength);"
 
-	self ffiCall: #(short SQLExecDirect (SQLHSTMT char* long))
+	self ffiCall: #(short SQLExecDirect (SQLHSTMT statementHandle, char *statementString, long statementLength))
 ]
 
 { #category : #'primitives - statements' }
@@ -218,28 +245,28 @@ ODBCLibrary >> sqlExecute: hstmt [
 	"SQLRETURN SQL_API SQLExecute(
 		SQLHSTMT		hstmt);"
 
-	self ffiCall: #(short SQLExecute (SQLHSTMT))
+	self ffiCall: #(short SQLExecute (SQLHSTMT hstmt))
 ]
 
 { #category : #'primitives - statements' }
 ODBCLibrary >> sqlFetch: statementHandle [ 
 	"SQLRETURN SQLFetch(SQLHSTMT StatementHandle);"
 
-	self ffiCall: #(short SQLFetch (SQLHSTMT))
+	self ffiCall: #(short SQLFetch (SQLHSTMT statementHandle))
 ]
 
 { #category : #'primitives - connections' }
 ODBCLibrary >> sqlFreeConnect: connectionHandle [ 
 	"SQLRETURN SQLFreeConnect(SQLHDBC ConnectionHandle);"
 
-	self ffiCall: #(short SQLFreeConnect (SQLHDBC))
+	self ffiCall: #(short SQLFreeConnect (SQLHDBC connectionHandle))
 ]
 
 { #category : #'primitives - environments' }
 ODBCLibrary >> sqlFreeEnv: environmentHandle [ 
 	"SQLRETURN SQLFreeEnv(SQLHENV EnvironmentHandle);"
 
-	self ffiCall: #(short SQLFreeEnv (SQLHENV))
+	self ffiCall: #(short SQLFreeEnv (SQLHENV environmentHandle))
 ]
 
 { #category : #'primitives - statements' }
@@ -249,7 +276,7 @@ ODBCLibrary >> sqlFreeStmt: statementHandle option: optionInteger [
 	SQLHSTMT StatementHandle,
 	SQLUSMALLINT Option); "
 
-	self ffiCall: #(short SQLFreeStmt (SQLHSTMT ushort))
+	self ffiCall: #(short SQLFreeStmt (SQLHSTMT statementHandle, ushort optionInteger))
 ]
 
 { #category : #'primitives - connections' }
@@ -261,7 +288,7 @@ ODBCLibrary >> sqlGetConnectAttr: connectionHandle attribute: attribute value: v
      SQLINTEGER     BufferLength,
      SQLINTEGER *     StringLengthPtr);"
 
-	self ffiCall: #(short SQLGetConnectAttr (SQLHDBC long void* long SQLInteger*))
+	self ffiCall: #(short SQLGetConnectAttr (SQLHDBC connectionHandle, long attribute, void* value, long length, SQLInteger *valueLength))
 ]
 
 { #category : #'primitives - statements' }
@@ -275,7 +302,7 @@ ODBCLibrary >> sqlGetData: statementHandle columnNumber: columnNumber targetType
 	SQLINTEGER BufferLength, 
 	SQLINTEGER *StrLen:=or:=Ind);"
 
-	self ffiCall: #(short SQLGetData (SQLHSTMT ulong short void* long SQLInteger*))
+	self ffiCall: #(short SQLGetData (SQLHSTMT statementHandle, ulong columnNumber, short targetType, void* targetValue, long bufferLength, SQLInteger *strLenght))
 ]
 
 { #category : #'primitives - connections' }
@@ -287,7 +314,7 @@ ODBCLibrary >> sqlGetInfo: hdbc with: infoType with: resultPtr with: size with: 
 		SQLSMALLINT     BufferLength,
 		SQLSMALLINT *     StringLengthPtr);"
 
-	self ffiCall: #(short SQLGetInfo (SQLHDBC ushort void* short SQLSmallInteger*))
+	self ffiCall: #(short SQLGetInfo (SQLHDBC hdbc, ushort infoType, void* resultPtr, short size, SQLSmallInteger *resultLenPtr))
 ]
 
 { #category : #'primitives - statements' }
@@ -296,7 +323,7 @@ ODBCLibrary >> sqlGetTypeInfo: hstmt with: dataType [
 		SQLHSTMT     StatementHandle,
 		SQLSMALLINT     DataType);"
 
-	self ffiCall: #(short SQLGetTypeInfo (SQLHSTMT ushort))
+	self ffiCall: #(short SQLGetTypeInfo (SQLHSTMT hstmt, ushort dataType))
 ]
 
 { #category : #'primitives - statements' }
@@ -306,7 +333,7 @@ ODBCLibrary >> sqlNumParams: statementHandle into: shortArray [
 	SQLHSTMT StatementHandle,
  	SQLSMALLINT *pcpar);"
 
-	self ffiCall: #(short SQLNumParams (SQLHSTMT SQLSmallInteger*))
+	self ffiCall: #(short SQLNumParams (SQLHSTMT statementHandle, SQLSmallInteger *shortArray))
 ]
 
 { #category : #'primitives - resultset' }
@@ -316,7 +343,7 @@ ODBCLibrary >> sqlNumResultCols: statementHandle columnCount: columnCount [
 	SQLHSTMT StatementHandle,
 	SQLSMALLINT *ColumnCount); "
 
-	self ffiCall: #(short SQLNumResultCols (SQLHSTMT SQLSmallInteger*))
+	self ffiCall: #(short SQLNumResultCols (SQLHSTMT statementHandle, SQLSmallInteger *columnCount))
 ]
 
 { #category : #'primitives - statements' }
@@ -327,7 +354,7 @@ ODBCLibrary >> sqlPrepare: statementHandle statement: statementString length: st
  	SQLCHAR *StatementText,
 	SQLINTEGER TextLength);"
 
-	self ffiCall: #(short SQLPrepare (SQLHSTMT char* long))
+	self ffiCall: #(short SQLPrepare (SQLHSTMT statementHandle, char *statementString, long  statementLength))
 ]
 
 { #category : #'primitives - resultset' }
@@ -337,7 +364,7 @@ ODBCLibrary >> sqlRowCount: statementHandle rowCount: rowCount [
 	SQLHSTMT StatementHandle,
 	SQLSMALLINT *RowCount); "
 
-	self ffiCall: #(short SQLRowCount (SQLHSTMT SQLSmallInteger*))
+	self ffiCall: #(short SQLRowCount (SQLHSTMT statementHandle, SQLSmallInteger *rowCount))
 ]
 
 { #category : #'primitives - connections' }
@@ -348,7 +375,7 @@ ODBCLibrary >> sqlSetConnectAttr: connectionHandle attribute: attribute value: v
 	SQLPOINTER ValuePtr,  
 	SQLINTEGER StringLength);"
 
-	self ffiCall: #(short SQLSetConnectAttr (SQLHDBC long long long))
+	self ffiCall: #(short SQLSetConnectAttr (SQLHDBC connectionHandle, long attribute, long value, long length))
 ]
 
 { #category : #'primitives - environments' }
@@ -359,7 +386,7 @@ ODBCLibrary >> sqlSetEnvAttr: hEnv attr: attr value: value length: length [
 		SQLPOINTER     ValuePtr,
 		SQLINTEGER     StringLength);"
 
-	self ffiCall: #(short SQLSetEnvAttr (SQLHENV long long long))
+	self ffiCall: #(short SQLSetEnvAttr (SQLHENV hEnv, long attr, long value, long length))
 ]
 
 { #category : #'primitives - environments' }
@@ -370,7 +397,7 @@ ODBCLibrary >> sqlSetEnvAttrPtr: hEnv attr: attr value: value length: length [
 		SQLPOINTER     ValuePtr,
 		SQLINTEGER     StringLength);"
 
-	self ffiCall: #(short SQLSetEnvAttr (SQLHENV long void* long))
+	self ffiCall: #(short SQLSetEnvAttr (SQLHENV hEnv, long attr, void* value, long length))
 ]
 
 { #category : #'primitives - statements' }
@@ -382,7 +409,7 @@ ODBCLibrary >> sqlSetStmtAttr: statementHandle name: attr value: value length: l
 		SQLPOINTER Value,
 		SQLINTEGER StringLength);"
 
-	self ffiCall: #(short SQLSetStmtAttr (SQLHSTMT long ulong long))
+	self ffiCall: #(short SQLSetStmtAttr (SQLHSTMT statementHandle, long attr, ulong value, long length))
 ]
 
 { #category : #'primitives - statements' }
@@ -393,7 +420,7 @@ ODBCLibrary >> sqlSetStmtAttrPtr: statementHandle name: attr value: value length
 		SQLPOINTER Value,
 		SQLINTEGER StringLength);"
 
-	self ffiCall: #(short SQLSetStmtAttr (SQLHSTMT long void* long))
+	self ffiCall: #(short SQLSetStmtAttr (SQLHSTMT statementHandle, long attr, void* value, long length))
 ]
 
 { #category : #'primitives - statements' }
@@ -403,7 +430,7 @@ ODBCLibrary >> sqlSetStmtOption: statementHandle name: attr value: value [
 		SQLUSMALLINT Option, 
 		SQLROWCOUNT Value);"
 
-	self ffiCall: #(short SQLSetStmtOption (SQLHSTMT ushort ulong))
+	self ffiCall: #(short SQLSetStmtOption (SQLHSTMT statementHandle, ushort attr, ulong value))
 ]
 
 { #category : #'as yet unclassified' }

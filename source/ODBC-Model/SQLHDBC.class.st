@@ -3,7 +3,7 @@ A handle to a database connection
 "
 Class {
 	#name : #SQLHDBC,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIExternalStructure,
 	#category : #'ODBC-Model-Structure'
 }
 
