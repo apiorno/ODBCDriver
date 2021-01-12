@@ -12,7 +12,7 @@ Class {
 
 { #category : #'instance creation' }
 ODBCLibrary class >> default [
-	^ default ifNil:[default := super new]
+	^ default ifNil:[default := super uniqueInstance]
 ]
 
 { #category : #accessing }
@@ -50,7 +50,15 @@ ODBCLibrary >> sqlAllocConnectEnvironment: environmentHandle connection: connect
 ODBCLibrary >> sqlAllocEnv: environmentHandle [
 	"SQLRETURN SQLAllocEnv(SQLHENV *EnvironmentHandle);"
 
-	self ffiCall: #(short SQLAllocEnv (SQLHENV *))
+	self ffiCall: #(short SQLAllocEnv (SQLHENV * environmentHandle))
+]
+
+{ #category : #'primitives - environments' }
+ODBCLibrary >> sqlAllocHandle: handleType inputHandle: inputHandle outputHandlePtr: outputHandlePtr [
+	"SQLRETURN SQL_API SQLAllocHandle(SQLSMALLINT HandleType, SQLHANDLE InputHandle, _Out_ SQLHANDLE *OutputHandle);"
+	"short SQLAllocHandle(short HandleType, void * InputHandle, void ** OutputHandle);"
+
+	self ffiCall: #(short SQLAllocHandle (short handleType, void * inputHandle, void * outputHandlePtr))
 ]
 
 { #category : #'primitives - statements' }

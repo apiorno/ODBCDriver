@@ -601,9 +601,13 @@ ODBCConnection >> shutDown [
 { #category : #'sql helpers' }
 ODBCConnection >> sqlAllocConnect: envHandle [
 	| h |
-	h := SQLHDBC new.
+"	h := SQLHDBC new.
 	self checkSQLReturn: (ODBCLibrary default 
 		sqlAllocConnectEnvironment: hEnv connection: h
+	)."
+	h := ExternalAddress new.
+	self checkSQLReturn: (ODBCLibrary default 
+		sqlAllocHandle: 2 inputHandle: envHandle outputHandlePtr: h
 	).
 	^h
 
@@ -612,8 +616,10 @@ ODBCConnection >> sqlAllocConnect: envHandle [
 { #category : #'sql helpers' }
 ODBCConnection >> sqlAllocEnv [
 	| h |
-	h := SQLHENV new.
-	self checkSQLReturn: (ODBCLibrary default sqlAllocEnv: h).
+"	h := SQLHENV new."
+"	self checkSQLReturn: (ODBCLibrary default sqlAllocEnv: h)."
+	h := ExternalAddress new.
+	self checkSQLReturn: (ODBCLibrary default sqlAllocHandle: 1 inputHandle: nil outputHandlePtr: h).
 	^h
 ]
 
