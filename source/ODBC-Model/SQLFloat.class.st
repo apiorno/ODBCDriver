@@ -3,7 +3,7 @@ SQL float datatype
 "
 Class {
 	#name : #SQLFloat,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

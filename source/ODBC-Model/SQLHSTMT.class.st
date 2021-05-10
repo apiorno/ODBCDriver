@@ -3,7 +3,7 @@ A handle to a statement
 "
 Class {
 	#name : #SQLHSTMT,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

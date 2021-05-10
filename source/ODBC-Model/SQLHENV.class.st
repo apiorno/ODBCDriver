@@ -3,7 +3,7 @@ A handle to an ODBC environment
 "
 Class {
 	#name : #SQLHENV,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
 	#category : #'ODBC-Model-Structure'
 }
 

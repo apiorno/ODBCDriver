@@ -3,7 +3,7 @@ SQL short datatype
 "
 Class {
 	#name : #SQLShort,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
 	#category : #'ODBC-Model-Structure'
 }
 
