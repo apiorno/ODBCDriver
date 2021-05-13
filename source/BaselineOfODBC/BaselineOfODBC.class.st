@@ -18,7 +18,13 @@ BaselineOfODBC >> baseline: spec [
 
 	<baseline>
 
-	spec
+	spec 
+		for: #common 
+		do: [ 
+			spec group: 'default' with: #('ODBC-Model').
+			 ]
+
+"	spec
 		for: #pharo
 		do: [ self
 				setUpDependencies: spec;
@@ -26,7 +32,7 @@ BaselineOfODBC >> baseline: spec [
 			spec
 				group: 'Deployment' with: 'Model';
 				group: 'CI' with: 'Tests';
-				group: 'Development' with: 'Tests' ]
+				group: 'Development' with: 'Tests' ]"
 ]
 
 { #category : #baseline }
