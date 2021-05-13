@@ -4,6 +4,11 @@ SQL time datatype
 Class {
 	#name : #SQLTime,
 	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_HOUR',
+		'OFFSET_MINUTE',
+		'OFFSET_SECOND'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,38 +20,47 @@ SQLTime class >> fields [
 	^ #(#(#hour 'ushort') #(#minute 'ushort') #(#second 'ushort') )
 ]
 
-{ #category : #accessing }
+{ #category : #'field definition' }
+SQLTime class >> fieldsDesc [ 
+	^ #(
+		ushort hour;
+		ushort minute;
+		ushort second;
+		)
+]
+
+{ #category : #'accessing structure variables' }
 SQLTime >> hour [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 1
+	^handle unsignedShortAt: OFFSET_HOUR
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTime >> hour: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 1 put: anObject
+	handle unsignedShortAt: OFFSET_HOUR put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTime >> minute [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 3
+	^handle unsignedShortAt: OFFSET_MINUTE
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTime >> minute: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 3 put: anObject
+	handle unsignedShortAt: OFFSET_MINUTE put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTime >> second [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 5
+	^handle unsignedShortAt: OFFSET_SECOND
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTime >> second: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 5 put: anObject
+	handle unsignedShortAt: OFFSET_SECOND put: anObject
 ]

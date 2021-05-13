@@ -4,6 +4,15 @@ SQL timestamp datatype
 Class {
 	#name : #SQLTimestamp,
 	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_DAY',
+		'OFFSET_FRACTION',
+		'OFFSET_HOUR',
+		'OFFSET_MINUTE',
+		'OFFSET_MONTH',
+		'OFFSET_SECOND',
+		'OFFSET_YEAR'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,86 +24,99 @@ SQLTimestamp class >> fields [
 	^ #(#(#year 'short') #(#month 'ushort') #(#day 'ushort') #(#hour 'ushort') #(#minute 'ushort') #(#second 'ushort') #(#fraction 'ulong') )
 ]
 
-{ #category : #accessing }
+{ #category : #'field definition' }
+SQLTimestamp class >> fieldsDesc [ 
+	^ #(
+		short year;
+		ushort month;
+		ushort day;
+		ushort hour;
+		ushort minute;
+		ushort second;
+		ulong fraction;
+		)
+]
+
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> day [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 5
+	^handle unsignedShortAt: OFFSET_DAY
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> day: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 5 put: anObject
+	handle unsignedShortAt: OFFSET_DAY put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> fraction [
 	"This method was automatically generated"
-	^handle unsignedLongAt: 13
+	^handle platformUnsignedLongAt: OFFSET_FRACTION
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> fraction: anObject [
 	"This method was automatically generated"
-	handle unsignedLongAt: 13 put: anObject
+	^handle platformUnsignedLongAt: OFFSET_FRACTION put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> hour [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 7
+	^handle unsignedShortAt: OFFSET_HOUR
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> hour: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 7 put: anObject
+	handle unsignedShortAt: OFFSET_HOUR put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> minute [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 9
+	^handle unsignedShortAt: OFFSET_MINUTE
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> minute: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 9 put: anObject
+	handle unsignedShortAt: OFFSET_MINUTE put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> month [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 3
+	^handle unsignedShortAt: OFFSET_MONTH
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> month: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 3 put: anObject
+	handle unsignedShortAt: OFFSET_MONTH put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> second [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 11
+	^handle unsignedShortAt: OFFSET_SECOND
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> second: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 11 put: anObject
+	handle unsignedShortAt: OFFSET_SECOND put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> year [
 	"This method was automatically generated"
-	^handle signedShortAt: 1
+	^handle signedShortAt: OFFSET_YEAR
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLTimestamp >> year: anObject [
 	"This method was automatically generated"
-	handle signedShortAt: 1 put: anObject
+	handle signedShortAt: OFFSET_YEAR put: anObject
 ]

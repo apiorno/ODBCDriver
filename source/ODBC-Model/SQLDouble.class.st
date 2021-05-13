@@ -4,6 +4,9 @@ SQL double datatype
 Class {
 	#name : #SQLDouble,
 	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLDouble class >> fields [
 	^ #(#(#value 'double') )
 ]
 
-{ #category : #accessing }
-SQLDouble >> value [
-	"This method was automatically generated"
-	^handle doubleAt: 1
+{ #category : #'field definition' }
+SQLDouble class >> fieldsDesc [ 
+	^ #(
+		double value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLDouble >> value [
+	"This method was automatically generated"
+	^handle doubleAt: OFFSET_VALUE
+]
+
+{ #category : #'accessing structure variables' }
 SQLDouble >> value: anObject [
 	"This method was automatically generated"
-	handle doubleAt: 1 put: anObject
+	handle doubleAt: OFFSET_VALUE put: anObject
 ]

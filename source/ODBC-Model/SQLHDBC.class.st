@@ -4,6 +4,9 @@ A handle to a database connection
 Class {
 	#name : #SQLHDBC,
 	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLHDBC class >> fields [
 	^ #(#(#value 'long') )
 ]
 
-{ #category : #accessing }
-SQLHDBC >> value [
-	"This method was automatically generated"
-	^handle signedLongAt: 1
+{ #category : #'as yet unclassified' }
+SQLHDBC class >> fieldsDesc [
+	^ #(
+		void * value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLHDBC >> value [
+	"This method was automatically generated"
+	^ExternalData fromHandle: (handle pointerAt: OFFSET_VALUE) type: ExternalType void asPointerType
+]
+
+{ #category : #'accessing structure variables' }
 SQLHDBC >> value: anObject [
 	"This method was automatically generated"
-	handle signedLongAt: 1 put: anObject
+	handle pointerAt: OFFSET_VALUE put: anObject getHandle.
 ]

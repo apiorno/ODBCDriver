@@ -4,6 +4,9 @@ SQL byte datatype
 Class {
 	#name : #SQLByte,
 	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLByte class >> fields [
 	^ #(#(#value 'byte') )
 ]
 
-{ #category : #accessing }
-SQLByte >> value [
-	"This method was automatically generated"
-	^handle unsignedByteAt: 1
+{ #category : #'field definition' }
+SQLByte class >> fieldsDesc [ 
+	^ #(
+		byte value;		
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLByte >> value [
+	"This method was automatically generated"
+	^handle unsignedByteAt: OFFSET_VALUE
+]
+
+{ #category : #'accessing structure variables' }
 SQLByte >> value: anObject [
 	"This method was automatically generated"
-	handle unsignedByteAt: 1 put: anObject
+	handle unsignedByteAt: OFFSET_VALUE put: anObject
 ]

@@ -4,6 +4,9 @@ A handle to an ODBC environment
 Class {
 	#name : #SQLHENV,
 	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLHENV class >> fields [
 	^ #(#(#value 'long') )
 ]
 
-{ #category : #accessing }
-SQLHENV >> value [
-	"This method was automatically generated"
-	^handle signedLongAt: 1
+{ #category : #'as yet unclassified' }
+SQLHENV class >> fieldsDesc [
+	^ #(
+		void * value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLHENV >> value [
+	"This method was automatically generated"
+	^ExternalData fromHandle: (handle pointerAt: OFFSET_VALUE) type: ExternalType void asPointerType
+]
+
+{ #category : #'accessing structure variables' }
 SQLHENV >> value: anObject [
 	"This method was automatically generated"
-	handle signedLongAt: 1 put: anObject
+	handle pointerAt: OFFSET_VALUE put: anObject getHandle.
 ]
