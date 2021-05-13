@@ -35,7 +35,7 @@ BaselineOfODBC >> baselineODBC: spec [
 	spec
 		package: 'ODBC-Model';
 		group: 'Model' with: 'ODBC-Model';
-		group: 'Tests' with: 'Tests'
+		group: 'Tests' with: 'ODBC-Tests'.
 ]
 
 { #category : #baseline }
