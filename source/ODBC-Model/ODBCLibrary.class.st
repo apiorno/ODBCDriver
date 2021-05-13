@@ -64,7 +64,7 @@ ODBCLibrary >> sqlAllocStmtConnection: environmentHandle statement: statementHan
 ]
 
 { #category : #'primitives - statements' }
-ODBCLibrary >> sqlBindCol: statementHandle columnNumber: columnNumber targetType: targetType targetValue: targetValue bufferLength: bufferLength strLength: strLenght [ 
+ODBCLibrary >> sqlBindCol: statementHandle columnNumber: columnNumber targetType: targetType targetValue: targetValue bufferLength: bufferLength strLength: strLength [ 
 	"SQLRETURN  
 	SQLGetData(  
 	SQLHSTMT StatementHandle,  
@@ -74,7 +74,7 @@ ODBCLibrary >> sqlBindCol: statementHandle columnNumber: columnNumber targetType
 	SQLINTEGER BufferLength,  
 	SQLINTEGER *StrLen:=or:=Ind);"
 
-	self ffiCall: #(short SQLBindCol (SQLHSTMT statementHandle, ushort columnNumber, short targetType, void * targetValue, long bufferLength, SQLInteger * strLenght))
+	self ffiCall: #(short SQLBindCol (SQLHSTMT statementHandle, ushort columnNumber, short targetType, void * targetValue, long bufferLength, SQLInteger * strLength))
 ]
 
 { #category : #'primitives - statements' }
