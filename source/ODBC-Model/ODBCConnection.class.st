@@ -295,7 +295,7 @@ ODBCConnection >> checkSQLReturn: sqlReturn statement: aStatementHandle [
 
 { #category : #connecting }
 ODBCConnection >> close [
-	"close the receiver and all the childrents"
+	"close the receiver and all the children"
 	self isConnected ifFalse: [
 		self log: 'disconnected!'.
 		^ self].

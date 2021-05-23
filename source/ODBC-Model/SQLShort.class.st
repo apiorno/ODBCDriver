@@ -3,7 +3,10 @@ SQL short datatype
 "
 Class {
 	#name : #SQLShort,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLShort class >> fields [
 	^ #(#(#value 'short') )
 ]
 
-{ #category : #accessing }
-SQLShort >> value [
-	"This method was automatically generated"
-	^handle signedShortAt: 1
+{ #category : #'field definition' }
+SQLShort class >> fieldsDesc [ 
+	^ #(
+		short value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLShort >> value [
+	"This method was automatically generated"
+	^handle signedShortAt: OFFSET_VALUE
+]
+
+{ #category : #'accessing structure variables' }
 SQLShort >> value: anObject [
 	"This method was automatically generated"
-	handle signedShortAt: 1 put: anObject
+	handle signedShortAt: OFFSET_VALUE put: anObject
 ]

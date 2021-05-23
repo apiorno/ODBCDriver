@@ -3,7 +3,10 @@ SQL unsigned integer datatype
 "
 Class {
 	#name : #SQLUInteger,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLUInteger class >> fields [
 	^ #(#(#value 'ulong') )
 ]
 
-{ #category : #accessing }
-SQLUInteger >> value [
-	"This method was automatically generated"
-	^handle unsignedLongAt: 1
+{ #category : #'field definition' }
+SQLUInteger class >> fieldsDesc [ 
+	^ #(
+		ulong value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLUInteger >> value [
+	"This method was automatically generated"
+	^handle platformUnsignedLongAt: OFFSET_VALUE
+]
+
+{ #category : #'accessing structure variables' }
 SQLUInteger >> value: anObject [
 	"This method was automatically generated"
-	handle unsignedLongAt: 1 put: anObject
+	^handle platformUnsignedLongAt: OFFSET_VALUE put: anObject
 ]

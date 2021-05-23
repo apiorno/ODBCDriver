@@ -3,7 +3,12 @@ SQL date datatype
 "
 Class {
 	#name : #SQLDate,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_DAY',
+		'OFFSET_MONTH',
+		'OFFSET_YEAR'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,38 +20,47 @@ SQLDate class >> fields [
 	^ #(#(#year 'short') #(#month 'ushort') #(#day 'ushort') )
 ]
 
-{ #category : #accessing }
+{ #category : #'field definition' }
+SQLDate class >> fieldsDesc [ 
+	^ #(
+		short year;
+		ushort month;
+		ushort day;
+		)
+]
+
+{ #category : #'accessing structure variables' }
 SQLDate >> day [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 5
+	^handle unsignedShortAt: OFFSET_DAY
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLDate >> day: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 5 put: anObject
+	handle unsignedShortAt: OFFSET_DAY put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLDate >> month [
 	"This method was automatically generated"
-	^handle unsignedShortAt: 3
+	^handle unsignedShortAt: OFFSET_MONTH
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLDate >> month: anObject [
 	"This method was automatically generated"
-	handle unsignedShortAt: 3 put: anObject
+	handle unsignedShortAt: OFFSET_MONTH put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLDate >> year [
 	"This method was automatically generated"
-	^handle signedShortAt: 1
+	^handle signedShortAt: OFFSET_YEAR
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
 SQLDate >> year: anObject [
 	"This method was automatically generated"
-	handle signedShortAt: 1 put: anObject
+	handle signedShortAt: OFFSET_YEAR put: anObject
 ]

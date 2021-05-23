@@ -3,7 +3,10 @@ SQL float datatype
 "
 Class {
 	#name : #SQLFloat,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLFloat class >> fields [
 	^ #(#(#value 'float') )
 ]
 
-{ #category : #accessing }
-SQLFloat >> value [
-	"This method was automatically generated"
-	^handle floatAt: 1
+{ #category : #'field definition' }
+SQLFloat class >> fieldsDesc [ 
+	^ #(
+		float value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLFloat >> value [
+	"This method was automatically generated"
+	^handle floatAt: OFFSET_VALUE
+]
+
+{ #category : #'accessing structure variables' }
 SQLFloat >> value: anObject [
 	"This method was automatically generated"
-	handle floatAt: 1 put: anObject
+	handle floatAt: OFFSET_VALUE put: anObject
 ]

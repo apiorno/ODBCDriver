@@ -3,7 +3,10 @@ SQL integer datatype
 "
 Class {
 	#name : #SQLInteger,
-	#superclass : #ExternalStructure,
+	#superclass : #FFIStructure,
+	#classVars : [
+		'OFFSET_VALUE'
+	],
 	#category : #'ODBC-Model-Structure'
 }
 
@@ -15,14 +18,21 @@ SQLInteger class >> fields [
 	^ #(#(#value 'long') )
 ]
 
-{ #category : #accessing }
-SQLInteger >> value [
-	"This method was automatically generated"
-	^handle signedLongAt: 1
+{ #category : #'field definition' }
+SQLInteger class >> fieldsDesc [ 
+	^ #(
+		long value;
+		)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing structure variables' }
+SQLInteger >> value [
+	"This method was automatically generated"
+	^handle platformLongAt: OFFSET_VALUE
+]
+
+{ #category : #'accessing structure variables' }
 SQLInteger >> value: anObject [
 	"This method was automatically generated"
-	handle signedLongAt: 1 put: anObject
+	^handle platformLongAt: OFFSET_VALUE put: anObject
 ]
